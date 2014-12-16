@@ -9,13 +9,14 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+        <link href="style.css" rel="stylesheet" type="text/css">
     </head>
+    
     <body>
         
-  <?php require './shiftplanning/function.php';?>
-              
- <table class="table">
+        <?php require '/backend/shifts.php'; ?>
+             
+  <table>
   <tr>
     <th>Title</th>
     <th>Start Date</th> 
@@ -26,22 +27,29 @@ and open the template in the editor.
     <th>Dollars</th>
     <th>Employees</th>
   </tr>
-  
-                 <?php foreach ($table as $data) { ?>
-               
-                 <tr>
-                    <td> <?php echo $data[0] ?> </td>
-                    <td> <?php echo $data[1] ?> </td>
-                    <td> <?php echo $data[2] ?> </td>
-                    <td> <?php echo $data[3] ?> </td>
-                    <td> <?php echo $data[4] ?> </td>
-                    <td> <?php echo $data[5] ?> </td>
-                    <td>"$" <?php echo $data[6] ?> </td>
-                    <td> <?php echo $data[7] ?> </td>               
-                 </tr>
-                 <?php } ?>
         
-       </table>
-        
+         <?php foreach ($shifts as $shift) { 
+         $emp_names_array = array();
+            //Get and format employees names
+            foreach($shift['employees'] as $employee){
+                array_push($emp_names_array, $employee['name']);
+            }
+            $emp_names = implode(',', $emp_names_array);    
+             
+         ?>
+                <tr>
+                    <td> <?php echo $shift['title'] != '' ? $shift['title'] : 'n/a' ?> </td>
+                    <td> <?php echo $shift['start_date']['formatted'] ?> </td>
+                    <td> <?php echo $shift['start_time']['time'] ?> </td>
+                    <td> <?php echo $shift['end_date']['formatted'] ?> </td>
+                    <td> <?php echo $shift['end_time']['time'] ?> </td>
+                    <td> <?php echo $shift['cost']['hours'] ?> </td>
+                    <td> <?php echo "$ " .$shift['cost']['dollars'] ?> </td>
+                    <td> <?php echo $emp_names ?> </td>
+                </tr>
+         <?php } ?>
+                
+  </table>
+                                        
 </body>
 </html>
