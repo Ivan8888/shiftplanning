@@ -14,7 +14,7 @@ and open the template in the editor.
     
     <body>
         
-        <?php require '/backend/shifts.php'; ?>
+        <?php require '/shiftplanning/shifts.php'; ?>
              
   <table>
   <tr>
