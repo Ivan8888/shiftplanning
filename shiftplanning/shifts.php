@@ -1,5 +1,5 @@
 <?php
-require './backend/src/shiftplanning.php';
+require './shiftplanning/src/shiftplanning.php';
 
         $config = 'b4c6352157357a2c10e590b55b1700e1c88db5f9';
         $login_credentials = array(
